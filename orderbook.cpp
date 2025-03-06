@@ -168,7 +168,7 @@ class OrderBook{
         std::unordered_map<OrderID, OrderEntry> orders_;
         
         bool CanMatch(Side side, Price price) const{
-            if (side == Side::buy){
+            if (side == Side::Buy){
                 return !asks_.empty() && asks_.begin()->first <= price;//more efficient than doing another if else first
             }
             return !bids_.empty() && bids_.begin()->first >= price;
@@ -215,7 +215,7 @@ class OrderBook{
                         asks_.erase(askPrice);
                     }
 
-                    trades.push_back(Trade{TradeInfo{bid->GetOrderID(), bid->GetPrice(), quantity}, TradeInfo{ask->GetOrderID(), ask->GetPrice(), quantity}});
+                    trades.push_back(Trade{TradeInfo{bid->GetOrderID(), quantity, bid->GetPrice()}, TradeInfo{ask->GetOrderID(), quantity, ask->GetPrice()}});
                 }
             }
             if(!bids_.empty()){
